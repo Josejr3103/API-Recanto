@@ -11,7 +11,7 @@
   "name": "prog-web",
   "version": "1.0.0",
   "description": "API REST com autenticação e autorização",
-  "main": "js/API.js",
+  "main": "API.js",
   "scripts": {
     "start": "node API.js",
     "dev": "nodemon API.js",
