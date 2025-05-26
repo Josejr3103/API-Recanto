@@ -416,31 +416,6 @@ app.post('/users/cart/clear', authenticate, async (req, res) => {
     }
 });
 
-// Nova rota para renovar o token
-app.post('/auth/renew', authenticate, async (req, res) => {
-    // Se o middleware authenticate passar, o token é válido.
-    // A informação do usuário está disponível em req.user
-    try {
-        const user = req.user;
-        const token = jwt.sign(
-            { uid: user.uid, username: user.username, isAdmin: user.isAdmin },
-            process.env.JWT_SECRET,
-            { expiresIn: '24h' } // Gera um novo token com nova expiração
-        );
-        res.json({
-            message: 'Token renovado com sucesso',
-            token,
-            user: { // Retorna informações básicas do usuário
-                username: user.username,
-                isAdmin: user.isAdmin
-            }
-        });
-    } catch (error) {
-        console.error('Erro na renovação do token:', error);
-        res.status(500).json({ error: 'Erro interno do servidor' });
-    }
-});
-
 // Error handling middleware
 app.use((err, req, res, next) => {
     console.error('Erro não tratado:', err.stack);
